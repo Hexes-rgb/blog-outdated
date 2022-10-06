@@ -13,4 +13,10 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id')
+        ->withPivot('tag_id');
+    }
 }
