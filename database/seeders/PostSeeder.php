@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostSeeder extends Seeder
 {
@@ -16,7 +17,14 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::factory()
-        ->count(2)
+        ->count(3)
         ->create();
+
+        foreach (Post::all() as $post)
+        {
+            $tags = Tag::inRandomOrder()->take(rand(1, count(Tag::all())))->pluck('id');
+            $post->tags()->attach($tags);
+        }
+
     }
 }

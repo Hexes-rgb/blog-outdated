@@ -19,7 +19,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'author_id' => User::factory(),
+            'author_id' => User::inRandomOrder()->take(rand(1, count(User::all())))->pluck('id')->first(),
             'title' => $this->faker->sentence,
             'content' => $this->faker->text,
             
