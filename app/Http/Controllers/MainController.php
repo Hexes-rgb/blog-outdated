@@ -18,7 +18,7 @@ class MainController extends Controller
         if(!empty($_GET['tag_id']))
         {
             $tag_id = $_GET['tag_id'];
-            $posts = Post::where();
+            $posts = Post::where('tags')->get();
         }
         else
         {
