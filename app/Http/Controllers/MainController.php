@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use PhpParser\Node\Name;
-
 use Illuminate\Http\Request;
-
 use App\Models\Post;
-
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
 
 class MainController extends Controller
 {
-    public function index() 
+    public function index(Request $request)
     {
         $tags = Tag::all();
-        if(!empty($_GET['tag_id']))
-        {
-            $tag_id = $_GET['tag_id'];
-            $posts = Post::where('tag_id', $tag_id)->get();
+        if ($request->input('tag_id')) {
+            $tag_id = $request->input('tag_id');
+            $posts = Post::whereHas('tags', function (Builder $query) use ($tag_id) {
+                $query->where('id', '=', $tag_id);
+            })->get();
+        } else {
+            $posts = Post::all();
         }
-        else
-        {
-        $posts = Post::all();
+        if ($request->input('text')) {
+            $text = $request->input('text');
+            $posts = Post::where('title', 'like', '%' . $text . '%')->get();
+            //dd($posts, $text);
         }
         return view('main', ['posts' => $posts, 'tags' => $tags]);
     }

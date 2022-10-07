@@ -1,6 +1,6 @@
 @section('header')
 
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+<header class="d-flex bg-white sticky-top flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-3">
       <h1><a href="/" class="nav-link link-dark">Blog</a></h1>
     </div>

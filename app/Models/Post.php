@@ -16,7 +16,8 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id')
-        ->withPivot('tag_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault([
+            'name' => 'Guest Author'
+        ]);
     }
 }

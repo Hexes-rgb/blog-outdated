@@ -20,9 +20,9 @@ class PostFactory extends Factory
     {
         return [
             'author_id' => User::inRandomOrder()->take(rand(1, count(User::all())))->pluck('id')->first(),
-            'title' => $this->faker->sentence,
-            'content' => $this->faker->text,
-            
+            'title' => fake()->unique()->sentence(),
+            'content' => fake()->unique()->text(),
+
         ];
     }
 }

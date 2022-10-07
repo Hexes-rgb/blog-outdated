@@ -17,14 +17,12 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::factory()
-        ->count(3)
-        ->create();
+            ->count(6)
+            ->create();
 
-        foreach (Post::all() as $post)
-        {
+        foreach (Post::all() as $post) {
             $tags = Tag::inRandomOrder()->take(rand(1, count(Tag::all())))->pluck('id');
             $post->tags()->attach($tags);
         }
-
     }
 }
