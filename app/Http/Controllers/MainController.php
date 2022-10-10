@@ -23,8 +23,10 @@ class MainController extends Controller
         }
         if ($request->input('text')) {
             $text = $request->input('text');
-            $posts = Post::where('title', 'like', '%' . $text . '%')->get();
-            //dd($posts, $text);
+            $posts = Post::where('title', 'like', '%' . $text . '%')
+                ->orWhereHas('tags', function (Builder $query) use ($text) {
+                    $query->where('name', 'like', '%' . $text . '%');
+                })->get();
         }
         return view('main', ['posts' => $posts, 'tags' => $tags]);
     }

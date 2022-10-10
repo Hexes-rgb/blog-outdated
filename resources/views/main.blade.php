@@ -11,7 +11,7 @@
         <form action="/" method="POST">
             @csrf
       <div class="input-group">
-        <input type="text" name="text" class="form-control rounded" aria-label="Search" aria-describedby="search-addon">
+        <input type="text" autocomplete="off" name="text" class="form-control rounded" aria-label="Search" aria-describedby="search-addon">
         <button type="submit" class="btn btn-outline-primary" style="">Search</button>
       </div>
         </form>
