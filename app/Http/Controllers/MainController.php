@@ -20,6 +20,7 @@ class MainController extends Controller
             })->get();
         } else {
             $posts = Post::all();
+            // $posts = Post::all();
         }
         if ($request->input('text')) {
             $text = $request->input('text');
